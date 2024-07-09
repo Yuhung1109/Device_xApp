@@ -11,11 +11,12 @@
 struct device_arp_table_entry {
 	uint8_t device_mac_addr[6];
 	uint32_t device_ip;
+	time_t timestamp;
 };
 
 unsigned int hash_arp(uint32_t device_ip);
 
-int device_arp_table_insert(uint8_t device_mac_addr[6], uint32_t device_ip);
+int device_arp_table_insert(uint8_t device_mac_addr[6], uint32_t device_ip, time_t timestamp);
 struct device_arp_table_entry* device_arp_table_get_entry_by_ul_ip(uint32_t hash);
 
 #endif

@@ -31,10 +31,17 @@ int device_table_insert(uint8_t device_mac_addr[6], uint32_t cpe_ip, uint32_t de
         device_hash_table[table_idx] = entry;
         return 0;
     }
+    // else{
+    //     printf("Device MAC Address: %02X:%02X:%02X:%02X:%02X:%02X\n", device_mac_addr[0], device_mac_addr[1],
+    //        device_mac_addr[2], device_mac_addr[3], device_mac_addr[4], device_mac_addr[5]);
+    //     printf("CPE IP: %u\n", cpe_ip);
+    //     printf("Device IP: %u\n", device_ip);
+    // }
     entry = (struct device_table_entry *)malloc(sizeof(struct device_table_entry));
     if (entry == NULL){
         printf("error when allocate space\n");
     }
+    
     memcpy(entry->device_mac_addr, device_mac_addr, 6);
     entry->cpe_ip = cpe_ip;
     entry->device_ip = device_ip;

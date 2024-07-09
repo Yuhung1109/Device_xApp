@@ -9,7 +9,7 @@
 
 static struct device_arp_table_entry *arp_hash_table[ARP_HASH_TABLE_SIZE];
 
-int device_arp_table_insert(uint8_t device_mac_addr[6], uint32_t device_ip)
+int device_arp_table_insert(uint8_t device_mac_addr[6], uint32_t device_ip, time_t timestamp)
 {
     uint32_t table_idx = ARP_HASK_TABLE_INDEX_MASK;
     struct device_arp_table_entry *entry;
@@ -20,6 +20,7 @@ int device_arp_table_insert(uint8_t device_mac_addr[6], uint32_t device_ip)
     if (entry) {
         memcpy(entry->device_mac_addr, device_mac_addr, 6);
     	entry->device_ip = device_ip;
+        entry->timestamp = timestamp;
 
     	arp_hash_table[table_idx] = entry;
         return 0;
@@ -32,6 +33,7 @@ int device_arp_table_insert(uint8_t device_mac_addr[6], uint32_t device_ip)
 
     memcpy(entry->device_mac_addr, device_mac_addr, 6);
     entry->device_ip = device_ip;
+    entry->timestamp = timestamp;
 
     arp_hash_table[table_idx] = entry;
 
